@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>التحصيل االدراسي</title>
+<meta name="generator" content="alnamshan7">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="تطبيقات-رمضان-2018.png" rel="apple-touch-icon" sizes="768x461">
+<link href="base/jquery-ui.min.css" rel="stylesheet">
+<link href="tahsili25.css" rel="stylesheet">
+<link href="page2.css" rel="stylesheet">
+<script src="jquery-1.12.4.min.js"></script>
+<script src="jquery-ui.min.js"></script>
+<script>
+$(document).ready(function()
+{
+   $("a[href*='#home']").click(function(event)
+   {
+      event.preventDefault();
+      $('html, body').stop().animate({ scrollTop: $('#home').offset().top }, 600, 'easeInQuad');
+   });
+   $("#jQueryButton1").button({ icon: 'ui-icon-arrowreturnthick-1-w', iconPosition: 'beginning' });
+});
+</script>
+<script>
+$(document).ready(function()
+{
+   // change the date here
+   var dateFuture = new Date("april 24, 2020 12:00:00");
+   var dateNow = new Date();
+   var seconds = Math.floor((dateFuture - (dateNow))/1000);
+   var minutes = Math.floor(seconds/60);
+   var hours = Math.floor(minutes/60);
+   var days = Math.floor(hours/24);
+
+   hours = hours-(days*24);
+   minutes = minutes-(days*24*60)-(hours*60);
+   seconds = seconds-(days*24*60*60)-(hours*60*60)-(minutes*60);
+   
+   $('#wb_days strong').first().data('value', days).addClass('counter');
+   $('#wb_hours strong').first().data('value', hours).addClass('counter');
+   $('#wb_minutes strong').first().data('value', minutes).addClass('counter');
+   $('#wb_seconds strong').first().data('value', seconds).addClass('counter');
+
+   // change the ID here: 'home' is the ID of the layout grid!
+   var $numbers = $('#home .counter');
+     
+   $numbers.each(function() 
+   {
+     var $obj = $(this);
+     $obj.data('done', false);
+     $obj.text('0');
+   });
+   $(window).bind('scroll', function() 
+   {
+      $numbers.each(function() 
+      {
+         var $obj = $(this);
+         if (!$obj.data('done') && $(window).scrollTop() + $(window).height() >= $obj.offset().top) 
+         {
+            $obj.data('done', true);
+            $obj.animate({scroll: 1}, 
+            { 
+               duration: 3000, 
+               step: function(now) 
+               {
+                  var $obj = $(this);
+                  var val = Math.round($obj.data('value') * now);
+                  $obj.text(val);
+               }
+            });
+         }
+      });
+   }).triggerHandler('scroll');
+});
+</script>
+</head>
+<body>
+<div id="container">
+</div>
+<div id="PageHeader1">
+   <button type="button" id="jQueryButton1" name="الرئيسية" value="    الرئيسية">    الرئيسية</button>
+   <div id="wb_Text1">
+      <span style="color:#009999;font-family:Arial;font-size:24px;"><strong>الرياضيات</strong></span></div>
+   <div id="wb_Image1">
+      <img src="images/logo2.png" id="Image1" alt=""></div>
+</div>
+<div id="home">
+<div id="home_Container">
+
+</div>
+</div>
+<div id="PageFooter1">
+<div id="PageFooter1_Container">
+<div id="wb_Image2">
+<img src="images/4.png" id="Image2" alt=""></div>
+</div>
+</div>
+</body>
+</html>
